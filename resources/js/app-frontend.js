@@ -1,58 +1,78 @@
-import './bootstrap';
-import 'flowbite';
+import $ from "jquery";
+import 'bootstrap';
+import 'jquery.easing';
+import Chocolat from 'chocolat';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
 
+window.$ = $;
 
-/**
- * Frontend Theme Switcher
- * ------------------------------------------------------------------
- */
-// // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-// if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-//     document.documentElement.classList.add('dark');
-// } else {
-//     document.documentElement.classList.remove('dark')
-// }
-
-/**
- * Set and switch theme
- */
-var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-
-// Change the icons inside the button based on previous settings
-if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    themeToggleLightIcon.classList.remove('hidden');
-} else {
-    themeToggleDarkIcon.classList.remove('hidden');
+Swiper.use([Navigation, Pagination]);
+"use strict";
+// init Chocolat light box
+var initChocolat = function () {
+  Chocolat(document.querySelectorAll('.image-link'), {
+    imageSize: 'contain',
+    loop: true,
+  })
 }
 
-var themeToggleBtn = document.getElementById('theme-toggle');
+document.addEventListener("DOMContentLoaded", function () {
 
-themeToggleBtn.addEventListener('click', function () {
+  window.addEventListener('scroll', function () {
 
-    // toggle icons inside button
-    themeToggleDarkIcon.classList.toggle('hidden');
-    themeToggleLightIcon.classList.toggle('hidden');
-
-    // if set via local storage previously
-    if (localStorage.getItem('color-theme')) {
-        if (localStorage.getItem('color-theme') === 'light') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        }
-
-        // if NOT set via local storage previously
+    if (window.scrollY > 50) {
+      document.getElementById('primary-header').classList.add('fixed-top');
     } else {
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        }
+      document.getElementById('primary-header').classList.remove('fixed-top');
+      // remove padding top from body
+      document.body.style.paddingTop = '0';
     }
-
+  });
 });
+// DOMContentLoaded  end
+
+
+$(function () {
+
+  initChocolat();
+
+
+  $(".user-items .search-item").on("click", function () {
+    $(".search-box").toggleClass('active');
+    $(".search-box .search-input").focus();
+  });
+  $(".close-button").on("click", function () {
+    $(".search-box").toggleClass('active');
+  });
+
+  var swiper = new Swiper(".testimonial-swiper", {
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+
+
+  var swiper = new Swiper(".team-swiper", {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    pagination: {
+      el: "#our-team .swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+      1200: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+    },
+  });
+
+
+}); // End of a document      

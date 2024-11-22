@@ -20,6 +20,15 @@
 
         @vite(["resources/css/app-frontend.css", "resources/js/app-frontend.js"])
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+      
+        <!-- script
+          ================================================== -->
+        <script src="js/modernizr.js"></script>
         @livewireStyles
 
         @stack("after-styles")
@@ -29,10 +38,9 @@
 
     <body>
         <x-selected-theme />
-
         @include("frontend.includes.header")
-
-        <main class="bg-white dark:bg-gray-800">
+        @include("frontend.includes.icons")
+        <main>
             @yield("content")
         </main>
 
