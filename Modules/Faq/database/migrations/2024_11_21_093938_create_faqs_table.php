@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('question');
             $table->string('slug')->nullable();
-            $table->text('description')->nullable();
+            $table->text('answer')->nullable();
             $table->tinyInteger('status')->default(1);
 
             $table->integer('created_by')->unsigned()->nullable();

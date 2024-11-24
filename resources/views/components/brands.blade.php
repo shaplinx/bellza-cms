@@ -1,4 +1,4 @@
-<section id="brand-collection" class="padding-large pt-0 overflow-hidden">
+<section id="brand-collection" class="padding-large mt-5 pt-0 overflow-hidden">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col pb-3">

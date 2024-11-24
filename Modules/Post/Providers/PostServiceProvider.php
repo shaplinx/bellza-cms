@@ -5,6 +5,8 @@ namespace Modules\Post\Providers;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Illuminate\Support\Facades\Blade;
+
 
 class PostServiceProvider extends ServiceProvider
 {
@@ -78,6 +80,8 @@ class PostServiceProvider extends ServiceProvider
         ], ['views', $this->moduleNameLower.'-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+        Blade::anonymousComponentNamespace('post::frontend.posts.components', 'post::frontend');
+
     }
 
     /**

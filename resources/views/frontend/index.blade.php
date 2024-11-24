@@ -38,7 +38,7 @@
     <x-faq::frontend::accordion />
     <x-book />
     <x-departement />
-    <x-latest-blog />
+    <livewire:recent-posts />
     <x-brands />
     <x-subscribe />
 @endsection

@@ -2,7 +2,7 @@
     <div class="col-12 col-sm-4 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'name';
+            $field_name = 'question';
             $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
             $required = "required";
@@ -46,7 +46,7 @@
     <div class="col-12 mb-3">
         <div class="form-group">
             <?php
-            $field_name = 'description';
+            $field_name = 'answer';
             $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
             $required = "";

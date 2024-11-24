@@ -1,5 +1,5 @@
 <section id="subscribe" class="d-flex align-items-center"
-        style="background-image: url(images/subscribe-bg.jpg); background-repeat: no-repeat;background-size: cover; height: 444px;">
+        style="background-image: url({{asset('images/subscribe-bg.jpg')}}); background-repeat: no-repeat;background-size: cover; height: 444px;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="subscribe-content">

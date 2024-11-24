@@ -52,7 +52,7 @@
                                 #
                             </th>
                             <th>
-                                @lang("faq::text.name")
+                                @lang("faq::text.question")
                             </th>
                             <th>
                                 @lang("faq::text.updated_at")
@@ -104,8 +104,8 @@
                 name: 'id'
             },
             {
-                data: 'name',
-                name: 'name'
+                data: 'question',
+                name: 'question'
             },
             {
                 data: 'updated_at',

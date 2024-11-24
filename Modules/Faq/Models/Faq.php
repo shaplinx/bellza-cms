@@ -13,6 +13,13 @@ class Faq extends BaseModel
 
     protected $table = 'faqs';
 
+    protected $fillable = [
+        'question',
+        'slug',
+        'answer',
+        'status',
+    ];
+
     /**
      * Create a new factory instance for the model.
      *

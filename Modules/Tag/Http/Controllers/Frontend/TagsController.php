@@ -36,11 +36,7 @@ class TagsController extends Controller
         $this->module_model = "Modules\Tag\Models\Tag";
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function index()
     {
         $module_title = $this->module_title;
@@ -60,12 +56,6 @@ class TagsController extends Controller
         );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function show($id)
     {
         $id = decode_id($id);
@@ -80,10 +70,12 @@ class TagsController extends Controller
         $module_action = 'Show';
 
         $$module_name_singular = $module_model::findOrFail($id);
+        $module_owner_paginated = $$module_name_singular->posts()->paginate();
+
 
         return view(
             "$module_path.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular")
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', "$module_name_singular", 'module_owner_paginated')
         );
     }
 }

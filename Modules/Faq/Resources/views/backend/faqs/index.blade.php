@@ -52,7 +52,7 @@
                                 #
                             </th>
                             <th>
-                                @lang("faq::text.name")
+                                @lang("faq::text.question")
                             </th>
                             <th>
                                 @lang("faq::text.slug")

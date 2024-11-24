@@ -5,12 +5,22 @@
 @endsection
 
 @section("content")
-    <x-frontend.header-block :title="__($module_title)">
-        <p class="mb-8 leading-relaxed">The list of {{ __($module_name) }}.</p>
-    </x-frontend.header-block>
+<x-frontend.header :title="__($module_title)" :breadcrumbs="[
+    [
+        'label' => 'Home',
+        'to' => route('home'),
+    ],
+    [
+        'label' =>ucfirst(__($module_name)),
+    ],
+]">
+    <p class="mb-8 leading-relaxed"> We publish articles on a number of {{ __($module_name) }}.
+        You can browse our posts by it's tags here.</p>
+</x-frontend.header>
 
-    <section class="bg-white p-6 text-gray-600 dark:bg-gray-700 sm:p-20">
-        <div class="grid grid-cols-2 gap-6 sm:grid-cols-3">
+<section id="our-services">
+    <div class="container mt-5">
+        <div class="row">
             @foreach ($$module_name as $$module_name_singular)
                 @php
                     $details_url = route("frontend.$module_name.show", [
@@ -18,16 +28,21 @@
                         $$module_name_singular->slug,
                     ]);
                 @endphp
-
-                <x-frontend.card :url="$details_url" :name="$$module_name_singular->name">
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        {{ $$module_name_singular->description }}
-                    </p>
-                </x-frontend.card>
+                <div class="col-lg-4 col-md-6 mt-2 pb-3">
+                    <a href="{{ $details_url }}">
+                        <div class="service-icon-box p-4 bg-light border-radius-10 text-center">
+                            <div class="icon-box-content">
+                                <h3 class="card-title py-2">{{ $$module_name_singular->name }}</h3>
+                                <p>{{ $$module_name_singular->description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             @endforeach
         </div>
         <div class="d-flex justify-content-center w-100 mt-3">
-            {{ $$module_name->links() }}
+            {{ $$module_name->links('vendor.pagination.frontend-pagination') }}
         </div>
-    </section>
+    </div>
+</section>
 @endsection

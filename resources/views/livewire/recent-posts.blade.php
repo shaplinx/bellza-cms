@@ -1,61 +1,66 @@
-<div>
-    <div class="container mx-auto flex w-full flex-col items-center justify-center">
-        <div
-            class="mb-2 w-full rounded-md border bg-white px-4 py-5 shadow dark:bg-gray-600 dark:text-gray-300 sm:px-6"
-        >
-            <h3 class="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
-                @lang("Recent Posts")
-            </h3>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-200">Recently published articles!</p>
-        </div>
-        <ul class="flex w-full flex-col">
-            @foreach ($recentPosts as $row)
-                @php
-                    $details_url = route("frontend.posts.show", [encode_id($row->id), $row->slug]);
-                @endphp
+<section id="latest-blog">
+    <div class="container">
+        <div class="row">
+            <div class="display-header">
+                <h2 class="display-5 fw-bold text-dark">Our Recent Posts</h2>
+            </div>
+            <div class="post-grid d-flex flex-wrap mt-4">
+                @foreach ($recentPosts as $row)
+                    @php
+                        $details_url = route('frontend.posts.show', [encode_id($row->id), $row->slug]);
+                    @endphp
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+                        <div class="card-item pe-2">
+                            <div class="card border-0 bg-transparent">
 
-                <li class="mb-2 flex flex-row border-gray-400">
-                    <div
-                        class="flex flex-1 transform cursor-pointer select-none items-center justify-between rounded-md bg-white p-4 shadow transition duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg dark:bg-gray-600 dark:text-gray-300"
-                    >
-                        <div class="flex">
-                            <div class="mr-4 flex h-10 flex-col items-center justify-center">
-                                <a class="relative block" href="{{ $details_url }}">
-                                    <img
-                                        class="mx-auto h-10 rounded object-cover"
-                                        src="{{ $row->image }}"
-                                        alt="{{ $row->name }}"
-                                    />
-                                </a>
-                            </div>
-                            <div class="pl-1">
-                                <div class="font-medium">
+                                <div class="card-image position-relative">
                                     <a href="{{ $details_url }}">
-                                        {{ $row->name }}
+                                        <img src="{{ $row->image }}" src="{{ $row->name }}"
+                                            class="post-image img-fluid border-radius-top-10">
+                                    </a>
+                                    <a
+                                        href="{{ route('frontend.categories.show', [encode_id($row->category_id), $row->category->slug]) }}">
+                                        <span
+                                            class="bg-primary-dim text-light position-absolute text-uppercase text-capitalize">{{ $row->category_name }}</span>
                                     </a>
                                 </div>
-                                <div class="text-sm text-gray-600 dark:text-gray-200">
-                                    {{ isset($row->created_by_alias) ? $row->created_by_alias : $row->created_by_name }}
+
+                            </div>
+                            <div class="card-body p-3 mt-2">
+                                <div class="meta-date">
+                                    {{ \Carbon\Carbon::parse($row->created_at)->format('l, j F Y ; h:i a') }}</div>
+                                <h3 class="card-title fs-3 text-capitalize fw-semibold mt-3">
+                                    <a href="{{ $details_url }}">{{ $row->name }}</a>
+                                </h3>
+                                <p>
+                                    @if ($row->created_by_alias)
+                                        <h6>
+                                            {{ $row->created_by_alias }}
+                                        </h6>
+                                    @else
+                                        <a href="{{ route('frontend.users.profile', $row->created_by) }}">
+                                            <h6>
+                                                {{ $row->created_by_name }}
+                                            </h6>
+                                        </a>
+                                    @endif
+                                </p>
+                                <p>{{ $row->intro }} <a href="{{ $details_url }}"
+                                        class="text-decoration-underline"><em>Read more</em></a>
+                                </p>
+                                <div class="mt-4 d-flex justify-content-start flex-wrap gap-1">
+                                    @foreach ($row->tags as $tag)
+                                        <x-frontend.badge :url="route('frontend.tags.show', [encode_id($tag->id), $tag->slug])" :text="$tag->name" />
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                        <button class="flex w-6 justify-end text-right">
-                            <svg
-                                class="text-gray-500 hover:text-gray-800 dark:text-gray-200"
-                                width="12"
-                                fill="currentColor"
-                                height="12"
-                                viewBox="0 0 1792 1792"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"
-                                ></path>
-                            </svg>
-                        </button>
                     </div>
-                </li>
-            @endforeach
-        </ul>
+                @endforeach
+            </div>
+        </div>
+        <a href="{{ route('frontend.posts.index') }}"
+            class="btn btn-medium btn-primary btn-pill text-uppercase text-center mx-auto">Read more
+            blogs</a>
     </div>
-</div>
+</section>
