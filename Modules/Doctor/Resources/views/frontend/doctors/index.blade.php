@@ -1,42 +1,59 @@
 @extends('frontend.layouts.app')
 
-@section('title') {{ __($module_title) }} @endsection
+@section('title')
+    {{ __($module_title) }}
+@endsection
 
 @section('content')
+    <x-frontend.header :title="__($module_title)" :breadcrumbs="[
+        [
+            'label' => 'Home',
+            'to' => route('home'),
+        ],
+        [
+            'label' => ucfirst(__($module_name)),
+        ],
+    ]">
+        <p class="mb-8 leading-relaxed">Here are our doctors.
+            You can browse our doctors here.</p>
+    </x-frontend.header>
 
-<section class="bg-gray-100 text-gray-600 py-20">
-    <div class="container mx-auto flex px-5 items-center justify-center flex-col">
-        <div class="text-center lg:w-2/3 w-full">
-            <h1 class="text-3xl sm:text-4xl mb-4 font-medium text-gray-800">
-                {{ __($module_title) }}
-            </h1>
-            <p class="mb-8 leading-relaxed">
-                The list of {{ __($module_name) }}.
-            </p>
+    <section id="review">
+        <div class=" services-sub container my-5 pb-5">
+            <div class="row">
+                @foreach ($$module_name as $models_singular)
+                    @php
+                        $details_url = route("frontend.$module_name.show", [
+                            encode_id($models_singular->id),
+                            $models_singular->slug,
+                        ]);
+                    @endphp
+                    <div class=" mt-5 col-md-6">
+                        <a href="{{$details_url}}">
+                        <div class="team-member d-flex align-items-lg-center">
+                            <div class="col-md-6">
+                                <div class="image-holder me-4 mb-4">
+                                    <img src="{{ $models_singular->image ?? asset('images/team-item.jpg')}}" alt="team member" class="border-radius-10 img-fluid">
+                                </div>  
+                            </div>
+                            <div class="col-md-6">
+                                <div class="member-info">
+                                    <h3 class="fs-4 fw-bold text-dark">{{$models_singular->name }}</h3>
+                                    <span class="text-uppercase fs-6 text-cadet-blue pb-2 d-block">{{ $models_singular->departement }}</span>
+                                    <p> {{$models_singular->intro}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
 
-            @include('frontend.includes.messages')
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="bg-white text-gray-600 p-6 sm:p-20">
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-        @foreach ($$module_name as $$module_name_singular)
-        @php
-        $details_url = route("frontend.$module_name.show",[encode_id($$module_name_singular->id), $$module_name_singular->slug]);
-        @endphp
-        
-        <x-frontend.card :url="$details_url" :name="$$module_name_singular->name">
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                {{$$module_name_singular->description}}
-            </p>
-        </x-frontend.card>
 
-        @endforeach
-    </div>
     <div class="d-flex justify-content-center w-100 mt-3">
-        {{$$module_name->links()}}
+        {{ $$module_name->links('vendor.pagination.frontend-pagination') }}
     </div>
-</section>
-
 @endsection

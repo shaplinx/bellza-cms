@@ -1,0 +1,1 @@
+<x-testimony::frontend::slider :testimonies="$recentTestimonies"/>

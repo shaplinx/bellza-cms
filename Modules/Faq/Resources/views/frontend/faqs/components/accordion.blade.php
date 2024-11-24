@@ -1,93 +1,40 @@
-<section id="faqs" class="pt-5 mt-5">
+@props([
+    'class',
+    'faqs' => [
+        'question' => "question", 
+        'answer' => "answer",
+    ],
+    'alwaysOpen' => false,
+    'title'
+])
+
+<section id="faqs" class="{{$class}}">
     <div class="container">
         <div class="row">
+            @if(isset($title))
             <div class="display-header mb-5">
-                <h2 class="display-5 fw-bold text-center text-dark">We’ve Got Answers</h2>
-            </div>
+                <h2 class="display-5 fw-bold text-center text-dark">{{$title}}</h2>
+              </div>
+            @endif
             <div class="accordion" id="accordion">
+                @foreach($faqs as $key => $faq)
                 <div class="accordion-item border-0 py-3">
                     <h2 class="accordion-header">
                         <button
                             class="accordion-button fs-4 fw-bold text-dark bg-transparent focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            Why to believe with Insove medical healthcare ?
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$faq['id']}}"
+                            aria-expanded="true" aria-controls="collapse-{{$faq['id']}}">
+                            {{$faq["question"]}}
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse border-0 collapse show"
-                        data-bs-parent="#accordion">
+                    <div id="collapse-{{$faq['id']}}" class="accordion-collapse border-0 collapse {{!$key ? 'show' : ''}}"
+                        {{ $alwaysOpen ? '' : 'data-bs-parent="#accordion"' }}>
                         <div class="accordion-body">
-                            <p>Diam orci gravida convallis at enim risus viverra. Hac mi tristique in aliquet tincidunt
-                                nam lectus
-                                nec. Placerat interdum auctor facilisi massa laoreet hendrerit posuere a. Tristique
-                                ultricies
-                                consectetu at.</p>
+                            <p>{{$faq["answer"]}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item border-0 py-3">
-                    <h2 class="accordion-header">
-                        <button
-                            class="accordion-button fs-4 fw-bold text-dark bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                            aria-expanded="false" aria-controls="collapseTwo">
-                            Will we get healthcare updates after surgery ?
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body">
-                            <p>This is the second item's accordion body.It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the overall
-                                appearance,
-                                as well as the showing and hiding via CSS transitions. You can modify any of this with
-                                custom CSS or
-                                overriding our default variables.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 py-3">
-                    <h2 class="accordion-header">
-                        <button
-                            class="accordion-button fs-4 fw-bold text-dark bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            What is the cost for just check-up ?
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body">
-                            <p>This is the third item's accordion body.It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the overall
-                                appearance,
-                                as well as the showing and hiding via CSS transitions. You can modify any of this with
-                                custom CSS or
-                                overriding our default variables.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 py-3">
-                    <h2 class="accordion-header">
-                        <button
-                            class="accordion-button fs-4 fw-bold text-dark bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                            aria-expanded="false" aria-controls="collapseFour">
-                            Can i cancel my appointment ?
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body">
-                            <p>This is the third item's accordion body.It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the overall
-                                appearance,
-                                as well as the showing and hiding via CSS transitions. You can modify any of this with
-                                custom CSS or
-                                overriding our default variables.</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

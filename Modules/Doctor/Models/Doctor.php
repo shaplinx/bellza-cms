@@ -13,6 +13,16 @@ class Doctor extends BaseModel
 
     protected $table = 'doctors';
 
+    protected $fillable =             
+    [
+        'name',
+        'slug',
+        'description',
+        'intro',
+        'content',
+        'status'
+    ];
+
     /**
      * Create a new factory instance for the model.
      *
@@ -22,4 +32,16 @@ class Doctor extends BaseModel
     {
         return \Modules\Doctor\database\factories\DoctorFactory::new();
     }
+
+        /**
+     * Get the list of Recently Published Articles.
+     *
+     * @param [type] $query [description]
+     * @return [type] [description]
+     */
+    public function scopeRecentlyPublished($query)
+    {
+        return $query->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc');
+    }
+
 }

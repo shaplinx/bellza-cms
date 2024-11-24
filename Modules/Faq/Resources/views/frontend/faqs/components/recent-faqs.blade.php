@@ -1,0 +1,1 @@
+<x-faq::frontend::accordion class="mt-5 pt-5" :faqs=" $recentFaqs" :always-open="false" title="Kami Punya Jawaban"/>

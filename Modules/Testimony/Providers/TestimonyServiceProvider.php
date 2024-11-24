@@ -4,6 +4,7 @@ namespace Modules\Testimony\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Blade;
 
@@ -82,6 +83,8 @@ class TestimonyServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
 
         Blade::anonymousComponentNamespace('testimony::frontend.testimonies.components', 'testimony::frontend');
+        Livewire::component($this->moduleNameLower."::recents", \Modules\Testimony\Http\Livewire\RecentsTestimony::class);
+
     }
 
     /**

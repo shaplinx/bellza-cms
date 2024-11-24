@@ -33,9 +33,9 @@
     ],
     " />
     <x-services />
-    <x-doctor::frontend::slider />
-    <x-testimony::frontend::slider />
-    <x-faq::frontend::accordion />
+    <livewire:doctor::recents />
+    <livewire:testimony::recents />
+    <livewire:faq::recents />
     <x-book />
     <x-departement />
     <livewire:recent-posts />

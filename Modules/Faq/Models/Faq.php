@@ -29,4 +29,17 @@ class Faq extends BaseModel
     {
         return \Modules\Faq\database\factories\FaqFactory::new();
     }
+
+    /**
+     * Get the list of Recently Published Articles.
+     *
+     * @param [type] $query [description]
+     * @return [type] [description]
+     */
+    public function scopeRecentlyPublished($query)
+    {
+        return $query->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc');
+    }
+
+
 }

@@ -5,6 +5,7 @@ namespace Modules\Doctor\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 use Symfony\Component\Finder\Finder;
 
 class DoctorServiceProvider extends ServiceProvider
@@ -80,7 +81,7 @@ class DoctorServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
         Blade::anonymousComponentNamespace('doctor::frontend.doctors.components', 'doctor::frontend');
-
+        Livewire::component($this->moduleNameLower."::recents", \Modules\Doctor\Http\Livewire\RecentDoctors::class);
     }
 
     /**

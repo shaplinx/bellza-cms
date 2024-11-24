@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Livewire\Livewire;
 
 class FaqServiceProvider extends ServiceProvider
 {
@@ -80,6 +81,7 @@ class FaqServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
         Blade::anonymousComponentNamespace('faq::frontend.faqs.components', 'faq::frontend');
+        Livewire::component($this->moduleNameLower."::recents", \Modules\Faq\Http\Livewire\FaqAccordion::class);
 
     }
 

@@ -57,4 +57,29 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            <?php
+            $field_name = "image";
+            $field_lable = __("post::$module_name.$field_name");
+            $field_placeholder = $field_lable;
+            $required = "required";
+            ?>
+
+            {{ html()->label($field_lable, $field_name)->class("form-label")->for($field_name) }}
+            {!! field_required($required) !!}
+            <div class="input-group mb-3">
+                {{ html()->text($field_name)->placeholder($field_placeholder)->class("form-control")->attributes(["$required", "aria-label" => "Image", "aria-describedby" => "button-image"]) }}
+                <button class="btn btn-outline-info" id="button-image" data-input="{{ $field_name }}" type="button">
+                    <i class="fas fa-folder-open"></i>
+                    &nbsp;
+                    @lang("Browse")
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <x-library.select2 />

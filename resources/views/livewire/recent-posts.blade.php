@@ -1,4 +1,4 @@
-<section id="latest-blog">
+<section id="latest-blog" class="padding-medium">
     <div class="container">
         <div class="row">
             <div class="display-header">

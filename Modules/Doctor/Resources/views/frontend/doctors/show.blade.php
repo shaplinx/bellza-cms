@@ -1,35 +1,54 @@
 @extends('frontend.layouts.app')
 
-@section('title') {{$$module_name_singular->name}} - {{ __($module_title) }} @endsection
+@section('title')
+    {{ $$module_name_singular->name }}
+@endsection
 
 @section('content')
-
-<section class="bg-gray-100 text-gray-600 py-10 sm:py-20">
-    <div class="container mx-auto flex px-5 items-center justify-center flex-col">
-        <div class="text-center lg:w-2/3 w-full">
-            <p class="mb-8 leading-relaxed">
-                <a href="{{route('frontend.'.$module_name.'.index')}}" class="outline outline-1 outline-gray-800 bg-gray-200 hover:bg-gray-100 text-gray-800 text-sm font-semibold mr-2 px-3 py-1 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {{ __($module_title) }}
-                </a>
-            </p>
-            <h1 class="text-3xl sm:text-4xl mb-4 font-medium text-gray-800">
-                {{$$module_name_singular->name}}
-            </h1>
-            <p class="mb-8 leading-relaxed">
-                {{$$module_name_singular->description}}
-            </p>
-
-            @include('frontend.includes.messages')
+    <section id="intro" style="background-color:#E8F0F1;">
+        <div class="container">
+            <div class="row padding-medium">
+                <div class="col-12 col-md-6">
+                    <div class="py-2 py-md-5">
+                        <h1 class="display-3 fw-bold text-dark">{{ $$module_name_singular->name }}</h1>
+                        <span class="item"><a href="{{ route('home') }}" class="">Home</a></span> &nbsp; <span
+                            class="">/</span> <a href="{{ route('frontend.posts.index') }}"
+                            class="">Posts</a></span> <span class="">/</span> &nbsp; <span
+                            class="item">{{ $$module_name_singular->name }}</span>
+                        <p class="mb-8 leading-relaxed">
+                            @if ($$module_name_singular->intro != '')
+                                <p class="mb-8 leading-relaxed">
+                                    {{ $$module_name_singular->intro }}
+                                </p>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 my-4 align-self-center ">
+                    <img
+                    class="rounded img-fluid shadow"
+                    src="{{ $$module_name_singular->image ?? asset('images/team-item.jpg') }}"
+                    alt="{{ $$module_name_singular->name }}"
+                />
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="bg-white text-gray-600 p-6 sm:p-20">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-            Content area.
+    <section class="container padding-small">
+        <div class="row">
+            <div class="col-12">
+                <div class="post-content">
+                        {!! $$module_name_singular->description !!}
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-
+    </section>
+    <x-subscribe />
 @endsection
+
+@push('after-style')
+@endpush
+
+@push('after-scripts')
+@endpush

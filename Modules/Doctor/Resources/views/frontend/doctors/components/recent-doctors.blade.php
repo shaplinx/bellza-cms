@@ -1,0 +1,1 @@
+<x-doctor::frontend::slider :doctors="$recentDoctors"/>

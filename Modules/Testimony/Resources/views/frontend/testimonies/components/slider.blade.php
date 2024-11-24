@@ -1,28 +1,25 @@
 @props([
     'testimonies' => [
         [
-            'writer' => 'James Rodrigo',
-            'as' => 'Costumer',
-            'message' =>
+            'name' => 'James Rodrigo',
+            'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.The more content you provide about you. Lorem, Quos saepe suscipit, nemo dolore sapiente!',
         ],
         [
-            'writer' => 'Jenny Rose',
-            'as' => 'Costumer',
-            'message' =>
+            'name' => 'Jenny Rose',
+            'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.The more content you provide about you. Lorem, Quos saepe suscipit, nemo dolore sapiente!',
         ],
         [
-            'writer' => 'Wednesday Marigold',
-            'as' => 'Costumer',
-            'message' =>
+            'name' => 'Wednesday Marigold',
+            'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.The more content you provide about you. Lorem, Quos saepe suscipit, nemo dolore sapiente!',
         ],
     ],
 ])
 
 <section id="testimonial"
-    style="background-image: url(images/review-bg.jpg); background-repeat: no-repeat; background-position: right; height: 595px;">
+    style="background-image: url({{asset('images/review-bg.jpg')}}); background-repeat: no-repeat; background-position: right; height: 595px;">
     <div class="container">
         <div class="row align-items-center padding-medium">
             <div class="col-lg-5 col-md-4">
@@ -42,12 +39,12 @@
                                             <use xlink:href="#quote-up" />
                                         </svg>
                                         <blockquote class="fs-4">
-                                            <p>{{ $testimony['message'] }}</p>
+                                            <p>{{ $testimony['description'] }}</p>
                                             <div class="author-detail">
-                                                <div class="name fs-3 fw-bold text-dark">{{ $testimony['writer'] }}
+                                                <div class="name fs-3 fw-bold text-dark">{{ $testimony['name'] }}
                                                 </div>
                                                 <span
-                                                    class="text-cadet-blue text-uppercase">{{ $testimony['as'] }}</span>
+                                                    class="text-cadet-blue text-uppercase">Pelanggan</span>
                                             </div>
                                         </blockquote>
                                         <svg class="quote quote-down primary-color-500 position-absolute" width="80"

@@ -25,9 +25,11 @@ class DoctorFactory extends Factory
     public function definition()
     {
         return [
-            'name'              => substr($this->faker->text(15), 0, -1),
+            'name'              => $this->faker->name(),
             'slug'              => '',
+            'departement'       => 'General Practicioner',
             'description'       => $this->faker->paragraph,
+            'intro'             => $this->faker->paragraph,
             'status'            => 1,
             'created_at'        => Carbon::now(),
             'updated_at'        => Carbon::now(),

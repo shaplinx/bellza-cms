@@ -22,4 +22,15 @@ class Testimony extends BaseModel
     {
         return \Modules\Testimony\database\factories\TestimonyFactory::new();
     }
+
+        /**
+     * Get the list of Recently Published Articles.
+     *
+     * @param [type] $query [description]
+     * @return [type] [description]
+     */
+    public function scopeRecentlyPublished($query)
+    {
+        return $query->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc');
+    }
 }
